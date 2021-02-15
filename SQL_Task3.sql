@@ -36,3 +36,25 @@ SELECT COUNT(surname) FROM Teacher WHERE surname LIKE 'T%'
 SELECT first_name + '.' + surname + '@takkula.fi' AS "Default email" FROM Student ORDER BY "Default email" ASC
 
 -- 11
+SELECT MONTH(birth_date) AS "Number of birth month", surname, first_name, student_number FROM Student ORDER BY 'Number of birth month', surname, first_name, student_number ASC
+
+-- 12
+SELECT COUNT(student_number) AS "Students" FROM Student WHERE MONTH(birth_date) = 5 ORDER BY 'Students' ASC
+
+-- 13
+SELECT DATENAME(QUARTER, start_date) AS "Quarter", start_date, course_code, instance_number FROM CourseInstance ORDER BY 'Quarter', start_date, course_code, instance_number ASC
+
+-- 14
+SELECT MONTH(birth_date) AS "Month", DAY(birth_date) AS "Day", surname, first_name, student_number FROM Student ORDER BY 'Month', 'Day', surname, first_name, student_number ASC
+
+-- 15
+SELECT COUNT(student_number) AS "Amount of students" FROM Student WHERE DATENAME(WEEKDAY, birth_date) = 'Sunday'
+
+-- 16
+SELECT LEFT(SYSDATETIME(), 10) AS "Current date", DATENAME(WEEKDAY, LEFT(SYSDATETIME(), 10)) AS "Weekday"
+
+-- 17
+SELECT DATEDIFF(DAY, start_date, end_date) AS "Course length", course_code, instance_number FROM CourseInstance ORDER BY 'Course length', course_code, instance_number ASC 
+
+-- 18
+SELECT DATEDIFF(YEAR, birth_date, LEFT(SYSDATETIME(), 10)) AS "Age", surname, first_name, student_number FROM Student ORDER BY 'Age' DESC, surname ASC, first_name ASC, student_number ASC
