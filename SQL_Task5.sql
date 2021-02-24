@@ -78,3 +78,17 @@ JOIN Course ON MisconductIncident.course_code = Course.course_code
 JOIN Student ON MisconductIncident.student_number = Student.student_number
 
 -- 15 
+
+SELECT Student.student_number, surname, first_name, SanctionType.description, MisconductType.description 
+FROM Student
+JOIN MisconductIncident ON Student.student_number = MisconductIncident.student_number
+JOIN SanctionType ON MisconductIncident.sanction_code = SanctionType.sanction_code
+JOIN MisconductType ON MisconductIncident.misconduct_code = MisconductType.misconduct_code
+WHERE SanctionType.description = 'Written warning' 
+
+-- 16
+SELECT COUNT(student_number) AS "Number of misconducts" , (SELECT COUNT(student_number) FROM Student) AS "Number of students", 
+CAST(COUNT(student_number) AS DECIMAL(4,1))
+/ CAST(
+(SELECT COUNT(student_number) FROM Student)
+AS DECIMAL(4,1)) * 100 AS "Misconduct %" FROM MisconductIncident 
